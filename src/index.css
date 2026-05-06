@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-epilogue: "Epilogue", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-background: #fdf8f7;
+  --color-surface: #fdf8f7;
+  --color-surface-container-low: #f7f3f1;
+  --color-surface-container: #f1edec;
+  --color-secondary-container: #e7e2da;
+  --color-secondary: #615e58;
+  --color-outline: #7d766f;
+  
+  --color-accent-yellow: #FFEB3B;
+  --color-accent-pink: #F06292;
+  --color-accent-green: #81C784;
+  --color-accent-purple: #BA68C8;
+}
+
+@utility hard-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+@utility hard-shadow-md {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+@utility hard-shadow-lg {
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+@utility lift-interaction {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px 0px #000000;
+  }
+  &:active {
+    transform: translate(0px, 0px);
+    box-shadow: 2px 2px 0px 0px #000000;
+  }
+}

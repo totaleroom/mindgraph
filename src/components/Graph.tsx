@@ -153,8 +153,8 @@ export function Graph({ thoughts, connections, selectedId, onSelect }: Props) {
             x2={b.x}
             y2={b.y}
             stroke="#000000"
-            strokeWidth={highlighted ? 2.5 : 1 + c.weight * 2}
-            strokeOpacity={selectedId ? (highlighted ? 1 : 0.12) : 0.35}
+            strokeWidth={highlighted ? 3.5 : 1.75 + c.weight * 3}
+            strokeOpacity={selectedId ? (highlighted ? 1 : 0.1) : 0.6}
           />
         );
       })}

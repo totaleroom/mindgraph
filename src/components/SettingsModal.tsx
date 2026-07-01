@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { KeyRound, X } from "lucide-react";
 import type { Settings } from "../types";
 
@@ -22,10 +23,21 @@ export function SettingsModal({ settings, onSave, onClearAll, onClose }: Props) 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onClose}>
-      <div
-        className="bg-surface border-2 border-primary hard-shadow-lg w-full max-w-md flex flex-col"
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
+    >
+      <motion.div
+        className="bg-surface border-2 border-primary hard-shadow-lg w-full max-w-md max-h-[90dvh] overflow-y-auto flex flex-col"
         onClick={(e) => e.stopPropagation()}
+        initial={{ scale: 0.9, y: 24, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.92, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 320, damping: 24 }}
       >
         <div className="flex items-center justify-between border-b-2 border-primary p-4">
           <div className="flex items-center gap-2">
@@ -91,7 +103,7 @@ export function SettingsModal({ settings, onSave, onClearAll, onClose }: Props) 
             Save
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Search } from "lucide-react";
 import { THOUGHT_TYPES, TYPE_META, type Thought, type ThoughtType } from "../types";
 import { ThoughtCard } from "./ThoughtCard";
@@ -58,16 +59,26 @@ export function ThoughtList({ thoughts, selectedId, onSelect, onUpdate, onRemove
               : "No thoughts match your filter."}
           </p>
         ) : (
-          filtered.map((t) => (
-            <ThoughtCard
-              key={t.id}
-              thought={t}
-              active={t.id === selectedId}
-              onSelect={() => onSelect(t.id === selectedId ? null : t.id)}
-              onUpdate={(patch) => onUpdate(t.id, patch)}
-              onRemove={() => onRemove(t.id)}
-            />
-          ))
+          <AnimatePresence initial={false}>
+            {filtered.map((t) => (
+              <motion.div
+                key={t.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95, y: -8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, height: 0, marginBottom: -12 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              >
+                <ThoughtCard
+                  thought={t}
+                  active={t.id === selectedId}
+                  onSelect={() => onSelect(t.id === selectedId ? null : t.id)}
+                  onUpdate={(patch) => onUpdate(t.id, patch)}
+                  onRemove={() => onRemove(t.id)}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         )}
       </div>
     </div>

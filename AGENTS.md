@@ -33,6 +33,15 @@ Standard commands live in `package.json` `scripts`.
 - The service worker only runs on a production build, **not** in `npm run dev`. To test PWA
   behavior (install prompt, offline), use `npm run build` then `npm run preview` and load
   the preview URL (default port 4173).
+- **Gotcha when testing UI changes:** `registerType: 'autoUpdate'` means an old `preview`
+  session's service worker will serve the **previously cached** build on first load, so your
+  latest changes may not appear at `:4173`. Test iterative UI/code changes against the dev
+  server (`npm run dev`, port 3000, no service worker), or hard-reload / clear site data on
+  the preview to pick up a fresh build.
+- The interactive graph (`src/components/Graph.tsx`) is touch-first: it uses pointer events
+  for pan, pinch-zoom, wheel-zoom, and node dragging, with `touch-action: none` on the SVG.
+  The `Workspace` shows a Graph/List segmented toggle below the `lg` breakpoint and both
+  panels side-by-side at `lg`+. Animations use the `motion` package (`motion/react`).
 - `vite.config.ts` uses `base: './'` (relative) so the static build works from any path —
   a root domain, a subfolder, or a GitHub Pages project site — with no server rewrites
   (routing is hash-based). Deploy `dist/` to any static host. A GitHub Pages workflow is

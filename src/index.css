@@ -44,3 +44,30 @@
     box-shadow: 2px 2px 0px 0px #000000;
   }
 }
+
+@utility safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Mobile touch ergonomics: kill the 300ms tap delay, disable the grey tap
+   flash, and prevent rubber-band/overscroll bleed on the app shell. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}

@@ -25,12 +25,14 @@ export function tokenize(text: string): string[] {
 }
 
 /**
- * Build weighted connections between thoughts using Jaccard similarity over
- * their keyword sets. Fully deterministic and offline — no API key required.
+ * Build weighted connections between thoughts using the overlap coefficient
+ * (shared / smaller keyword set). This works well for short thoughts where a
+ * single meaningful shared keyword is a genuine link. Fully deterministic and
+ * offline — no API key required.
  */
 export function computeConnections(
   thoughts: Thought[],
-  threshold = 0.12,
+  threshold = 0.14,
 ): Connection[] {
   const tokenMap = new Map<string, Set<string>>();
   for (const t of thoughts) tokenMap.set(t.id, new Set(tokenize(t.content)));
@@ -43,13 +45,12 @@ export function computeConnections(
       if (a.size === 0 || b.size === 0) continue;
       const shared = [...a].filter((w) => b.has(w));
       if (shared.length === 0) continue;
-      const union = new Set([...a, ...b]).size;
-      const weight = shared.length / union;
-      if (weight >= threshold) {
+      const overlap = shared.length / Math.min(a.size, b.size);
+      if (overlap >= threshold) {
         connections.push({
           source: thoughts[i].id,
           target: thoughts[j].id,
-          weight,
+          weight: Math.min(1, overlap),
           shared,
         });
       }

@@ -38,11 +38,11 @@ export function seedThoughts(): Thought[] {
     updatedAt: now - minsAgo * 60_000,
   });
   return [
-    mk("Scaling the product feels exciting but the infra cost worries me.", "worry", 600),
-    mk("What if onboarding was a single guided graph instead of a form?", "idea", 480),
-    mk("Ship the local-first storage layer before adding the AI features.", "task", 300),
-    mk("Users keep mentioning 'focus' and 'overwhelm' in feedback calls.", "insight", 180),
-    mk("A weekly digest could resurface forgotten ideas about scaling.", "idea", 90),
-    mk("Anxiety spikes right before big releases — build a calmer changelog.", "worry", 30),
+    mk("What if onboarding was a single guided graph instead of a boring form?", "idea", 600),
+    mk("Scaling the team is exciting but the infra cost really worries me.", "worry", 480),
+    mk("Ship the local-first storage layer before adding any AI features.", "task", 300),
+    mk("Users keep mentioning focus and overwhelm when scaling their work.", "insight", 180),
+    mk("A weekly digest could resurface forgotten ideas about scaling and focus.", "idea", 90),
+    mk("Anxiety spikes before big releases — scaling pressure hits hardest then.", "worry", 30),
   ];
 }

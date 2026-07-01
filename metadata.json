@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "MindGraph",
+  "description": "A local-first knowledge graph for your thoughts. Capture ideas, see connections, and generate insights — private by default.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }

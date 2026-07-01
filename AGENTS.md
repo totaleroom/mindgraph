@@ -25,6 +25,19 @@ Standard commands live in `package.json` `scripts`.
 - **Types note:** React 19 ships no bundled types, so `@types/react` /
   `@types/react-dom` are required dev deps for `npm run lint` (`tsc --noEmit`) to pass.
 
+### PWA & deployment
+- The app is an installable, offline-capable **PWA** via `vite-plugin-pwa` (config in
+  `vite.config.ts`). The build emits `manifest.webmanifest` + a Workbox `sw.js`. Icons live
+  in `public/` (generated from `public/icon.svg`; no build-time image tooling is needed
+  since the PNGs are committed).
+- The service worker only runs on a production build, **not** in `npm run dev`. To test PWA
+  behavior (install prompt, offline), use `npm run build` then `npm run preview` and load
+  the preview URL (default port 4173).
+- `vite.config.ts` uses `base: './'` (relative) so the static build works from any path —
+  a root domain, a subfolder, or a GitHub Pages project site — with no server rewrites
+  (routing is hash-based). Deploy `dist/` to any static host. A GitHub Pages workflow is
+  provided at `.github/workflows/deploy.yml` (enable Pages → Source: GitHub Actions).
+
 - **Run (dev):** `npm run dev` serves on `http://localhost:3000` (bound to `0.0.0.0`, port
   is hard-coded via `--port=3000` in the script).
 - **Lint / typecheck:** `npm run lint` (runs `tsc --noEmit`).
